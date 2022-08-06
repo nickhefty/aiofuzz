@@ -1,6 +1,6 @@
 # aiofuzz
 
-This is a small and blazingly-fast web directory fuzzer. The aiofuzz.py file contains only the Fuzzer class.
+This is a small and blazingly-fast web directory fuzzing library. The aiofuzz.py file contains only the Fuzzer class.
 
 
 
