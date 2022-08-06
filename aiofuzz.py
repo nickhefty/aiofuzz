@@ -1,8 +1,10 @@
 import asyncio, aiohttp
+from re import M
 from typing import Callable
 from time import perf_counter
 from urllib.parse import urljoin
 from os import get_terminal_size
+import json
 
 
 class Fuzzer:
@@ -41,14 +43,13 @@ class Fuzzer:
         print(*args, **kwargs)
 
     @staticmethod
-    def default_check(response):
+    async def default_check(response):
         return response.status in [200, 301]
 
-    def default_success_handler(self, response):
-        self.clear_line()
-        print("found", response.url)
+    async def default_success_handler(self, response):
+        self.print("found", response.url)
 
-    def default_failure_handler(self, response):
+    async def default_failure_handler(self, response):
         pass
 
     async def getter(self):
@@ -57,13 +58,13 @@ class Fuzzer:
             resp = await self.session.get(url)
             await resp.text()
             
-            if self.check(resp):
+            if await self.check(resp):
 
-                self.success(resp)
+                await self.success(resp)
 
             else:
 
-                self.failure(resp)
+                await self.failure(resp)
 
             self.result.append((resp.status, url))
 
@@ -98,4 +99,3 @@ class Fuzzer:
     async def start(self):
         self.gen = self.async_gen()
         await self.do_loop()
-
