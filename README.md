@@ -23,7 +23,7 @@ This is a small and blazingly-fast web directory fuzzing library. The aiofuzz.py
 #### workers
 This is an integer defining the number of workers and simultaneous requests allowed. Default=5
 #### check_func
-The check_func function accepts an aiohhtp.ClientResponse object and returns a boolean determining whether the response is a "hit" or not.
+The check_func function is called on each aiohhtp.ClientResponse object and returns a boolean determining whether the response is a "hit" or not.
 If one is not provided, it will use this default:
 
     async def default_check(response):
