@@ -1,5 +1,4 @@
 import asyncio, aiohttp
-from re import M
 from typing import Callable
 from time import perf_counter
 from urllib.parse import urljoin
